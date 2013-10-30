@@ -2,7 +2,7 @@ import re, sys, gc, argparse
 from numpy import array
 
 #Author: Nima C. Emami, UCSF BMI (Bioinformatics)
-#License: BSD 3-clause, see github LICENSE file
+#License: BSD 3-clause, github.com/nemami/PeakTracker/blob/master/LICENSE
 
 class Genome:
 	def __init__(self):
@@ -152,6 +152,7 @@ def main(inputFiles, outputFile, windowLength, inputCount, inputSignal, inputStd
 					mergeSignals = signalValues
 				output.append((lastBinIndices+[locus,],mergeSignals))
 			lastLocus = locus
+		print "\t"+currentChrom+": found "+str(len(output))+" windows."
 		totalBins += len(output)
 		with open(outputFile,"a") as outFh:
 			for outIndices, signals in output:
@@ -165,6 +166,15 @@ def main(inputFiles, outputFile, windowLength, inputCount, inputSignal, inputStd
 			'at most  ',str(inputStdev),'% signal value standard deviation, relative to average,\n\t', \
 			'with window length of ',str(windowLength),',\n\t', \
 			'returned ',str(totalBins),' total bins. Please see ',outputFile,' for further details.'
+
+def errors(inputFiles, outputFile, windowLength, inputCount, inputSignal, inputStdev):
+	if len(inputFiles) < 2:
+		print "Error: user must input multiple .narrowpeak and/or .broadpeak files. Exiting."
+		return True
+	elif inputCount > inputFiles:
+		print "Error: -count parameter must not exceed the number of input files. Exiting."
+		return True
+	return False
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser( \
@@ -185,9 +195,11 @@ if __name__ == "__main__":
 							overlapping peaks in a given window, as a percent of average signal value 
 							(-signal flag). Example: if invoking -signal 60, with -stdev 20, only peaks
 							which (a) contain an average signal of at least 60, AND (b) contain a
-							standard deviation of at most 15, will be returned. (Default = 25%).''', 
+							standard deviation of at most 15, will be returned. (Default = 25 %%).''', 
 							type = float, default = 25.0)
 	args = parser.parse_args()
-	inputFiles, inputCount, inputSignal = args.input, args.count, args.signal
+
+	if errors(args.input, args.output, args.window, args.count, args.signal, args.stdev):
+		sys.exit(1)
 
 	main(args.input, args.output, args.window, args.count, args.signal, args.stdev)
