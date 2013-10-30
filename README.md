@@ -1,8 +1,8 @@
 PeakTracker
 ================================================================================
 
-Peak value comparisons across UCSC .[narrow|broad]peak genome track files\n
-Author: Nima C. Emami, UCSF BMI (Bioinformatics)\n
+Peak value comparisons across UCSC .[narrow|broad]peak genome track files<br>
+Author: Nima C. Emami, UCSF BMI (Bioinformatics)<br>
 License: github.com/nemami/PeakTracker/blob/master/LICENSE
 
 ================================================================================
@@ -10,13 +10,13 @@ License: github.com/nemami/PeakTracker/blob/master/LICENSE
 Dependencies
 ============
 
-Python 2.7      (http://www.python.org/getit/releases/2.7/)\n
+Python 2.7      (http://www.python.org/getit/releases/2.7/)<br>
 Python modules: argparse, numpy
 
 File Format Specifications
 ==========================
 
-narrowpeak:     http://genome.ucsc.edu/FAQ/FAQformat.html#format12\n
+narrowpeak:     http://genome.ucsc.edu/FAQ/FAQformat.html#format12<br>
 broadpeak:      http://genome.ucsc.edu/FAQ/FAQformat.html#format13
 
 Usage
