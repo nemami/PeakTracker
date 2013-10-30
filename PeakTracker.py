@@ -2,7 +2,7 @@ import re, sys, gc, argparse
 from numpy import array
 
 #Author: Nima C. Emami, UCSF BMI (Bioinformatics)
-#License: BSD 3-clause, github.com/nemami/PeakTracker/blob/master/LICENSE
+#License: github.com/nemami/PeakTracker/blob/master/LICENSE
 
 class Genome:
 	def __init__(self):
